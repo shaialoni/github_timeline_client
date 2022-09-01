@@ -1,41 +1,87 @@
-import React from 'react';
-import {
-  ChakraProvider,
-  Box,
-  Text,
-  Link,
-  VStack,
-  Code,
-  Grid,
-  theme,
-} from '@chakra-ui/react';
-import { ColorModeSwitcher } from './ColorModeSwitcher';
-import { Logo } from './Logo';
+import React, { useState, Fragment } from 'react'
+import { Route, Routes } from 'react-router-dom'
+import { v4 as uuid } from 'uuid'
+
+// import AuthenticatedRoute from './components/shared/AuthenticatedRoute'
+import AutoDismissAlert from './components/shared/AutoDismissAlert/AutoDismissAlert'
+// import Header from './components/shared/Header'
+import RequireAuth from './components/shared/RequireAuth'
+import Home from './components/Home'
+import SignUp from './components/auth/SignUp'
+import SignIn from './components/auth/SignIn'
+import SignOut from './components/auth/SignOut'
+import ChangePassword from './components/auth/ChangePassword'
+import Nav from './components/shared/Nav'
 
 function App() {
+
+  const [user, setUser] = useState(null)
+  const [msgAlerts, setMsgAlerts] = useState([])
+
+  console.log('user in app', user)
+  console.log('message alerts', msgAlerts)
+  const clearUser = () => {
+    console.log('clear user ran')
+    setUser(null)
+  }
+
+  const deleteAlert = (id) => {
+		setMsgAlerts((prevState) => {
+			return (prevState.filter((msg) => msg.id !== id) )
+		})
+	}
+
+	const msgAlert = ({ heading, message, variant }) => {
+		const id = uuid()
+		setMsgAlerts(() => {
+			return (
+				[{ heading, message, variant, id }]
+      )
+		})
+	}
+
+
   return (
-    <ChakraProvider theme={theme}>
-      <Box textAlign="center" fontSize="xl">
-        <Grid minH="100vh" p={3}>
-          <ColorModeSwitcher justifySelf="flex-end" />
-          <VStack spacing={8}>
-            <Logo h="40vmin" pointerEvents="none" />
-            <Text>
-              Edit <Code fontSize="xl">src/App.js</Code> and save to reload.
-            </Text>
-            <Link
-              color="teal.500"
-              href="https://chakra-ui.com"
-              fontSize="2xl"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn Chakra
-            </Link>
-          </VStack>
-        </Grid>
-      </Box>
-    </ChakraProvider>
+    <Fragment>
+      	<Nav user={user} />
+      	<Routes>
+			<Route path="/" element={<Home msgAlert={msgAlert} user={user} />} />
+			<Route
+			path="/sign-up"
+			element={<SignUp msgAlert={msgAlert} setUser={setUser} />}
+			/>
+			<Route
+			path="/sign-in"
+			element={<SignIn msgAlert={msgAlert} setUser={setUser} />}
+			/>
+			<Route
+			path="/sign-out"
+			element={
+				<RequireAuth user={user}>
+				<SignOut msgAlert={msgAlert} clearUser={clearUser} user={user} />
+				</RequireAuth>
+			}
+			/>
+			<Route
+			path="/change-password"
+			element={
+				<RequireAuth user={user}>
+				<ChangePassword msgAlert={msgAlert} user={user} />
+				</RequireAuth>
+			}
+			/>
+      	</Routes>
+		{msgAlerts.map(msgAlert => (
+			<AutoDismissAlert
+			key={msgAlert.id}
+			heading={msgAlert.heading}
+			variant={msgAlert.variant}
+			message={msgAlert.message}
+			id={msgAlert.id}
+			deleteAlert={deleteAlert}
+			/>
+		))}
+    </Fragment>
   );
 }
 

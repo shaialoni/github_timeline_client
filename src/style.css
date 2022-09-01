@@ -1,0 +1,133 @@
+
+
+#sign-in, #sign-up, #destinationForm, #change-password{
+    position: absolute;
+    z-index: 1;
+    display:flex;
+    top: 30%;
+    left: 43%
+}
+
+.dropdown-menu {
+    height: 200px;
+    overflow-y: scroll;
+  }
+
+  #tagField {
+    display: flex;
+    
+  }
+
+  .dropdown-item {
+      color: black
+  }
+  #sus {
+      height: 20px
+  }
+
+ 
+#navbar{
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 10s ease infinite;
+	/* height: 100vh; */
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+  .navItems {
+    margin-left: 20px;
+    border: 0px solid black;
+    background-color: transparent;
+    background: linear-gradient(to right, transparent, transparent),
+      linear-gradient(to right, rgb(163, 62, 62), rgb(52, 35, 183), rgb(178, 215, 59));
+    background-size: 100% 0.2em, 0 0.2em;
+    background-position: 100% 100%, 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 400ms;
+  }
+  
+  .navItems:hover,
+  .navItems:focus {
+    background-size: 0 0.1em, 100% 0.1em;
+    cursor: pointer;
+  }
+
+  #navCont {
+      display: flex;
+      
+  }
+
+  .overlay{
+    position: absolute;
+    top: 3%;
+    left: 0;
+    height: auto;
+    width: 100%;
+    background-color: black;
+    opacity: 0.8;
+    z-index: 1;
+} 
+
+#backgroundVideo{
+    position: fixed;
+    top: 56%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: 100%;
+    height: auto;
+    z-index: 0;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    pointer-events: none;
+}
+
+#projInput{
+  margin-top: 5px;
+  border:solid 1px #ccc;
+  border-radius: 6px;
+  width: 100%;
+  text-align: center;
+}
+
+#projInput::placeholder{
+  color:#6C757D
+}
+
+#projInput:focus {
+  outline: rgb(0, 179, 255);
+}
+#search {
+    position: absolute;
+    margin-top: 35px;
+    margin-left: 33%;
+    height: 40px;
+    border-radius: 8px;
+    text-align: center;
+    background: transparent;
+    border: 2px solid whitesmoke;
+    color: white;
+    width: 35%
+}
+
+#projImg {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  border-radius: 8px;
+  border: 2px solid white;
+  max-height: 180px;
+}
