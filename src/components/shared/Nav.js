@@ -8,7 +8,7 @@ import {
   useColorModeValue,
   useMediaQuery,
   Link,
-  Button,
+  // Button,
   useDisclosure, 
   Box,
 } from '@chakra-ui/react'
@@ -17,12 +17,11 @@ import { FaAlignJustify } from 'react-icons/fa'
 import { Icon } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
 import "../../style.css";
-import { ColorMode } from '@chakra-ui/react'
 
 const Nav = ({ onOpen, user, clearUser }) => {
   const [scroll, setScroll] = useState(false)
-  //const { colorMode, toggleColorMode } = useColorMode()
-  //const navBg = useColorModeValue('white', 'blackAlpha.200')
+  const { colorMode, toggleColorMode } = useColorMode()
+  const navBg = useColorModeValue('white', 'blackAlpha.200')
   const [isLargerThanMD] = useMediaQuery('(min-width: 48em)')
   const navigate = useNavigate()
   const changeScroll = () =>
@@ -55,7 +54,7 @@ const Nav = ({ onOpen, user, clearUser }) => {
       {/* bgGradient='linear(to-l, #7928CA, #FF0080)' */}
 
       <Text fontSize="xl" fontWeight="bold"  bgClip='text' color='white'>
-              Project Share
+              Github Timeline
               </Text><img src='https://cdn.dribbble.com/users/21285/screenshots/1280314/drib.gif
 ' height='30px' width='30px' background="transparent"/>
       {isLargerThanMD ? (
