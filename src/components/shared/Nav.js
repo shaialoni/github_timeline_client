@@ -120,9 +120,9 @@ const Nav = ({ onOpen, user, clearUser }) => {
       <Spacer />
       
       <Flex alignItems="center">
-        <IconButton mr="5" w={6} h={6} p={5} onClick={toggleColorMode}>
+        {/* <IconButton mr="5" w={6} h={6} p={5} onClick={toggleColorMode}>
           {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
-        </IconButton>
+        </IconButton> */}
 
         {isLargerThanMD ? (
           <>
