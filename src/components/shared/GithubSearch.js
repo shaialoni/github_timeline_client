@@ -23,8 +23,6 @@ const GitHubSearch = () => {
 
     return (
       <>
-        
-
         <Input 
                 placeholder='Search Github' 
                 style={{
