@@ -1,6 +1,9 @@
-import { Input, Button } from '@chakra-ui/react'
+// github search user component here
 import { useState } from 'react'
+import { Input, Button } from '@chakra-ui/react'
 import axios from 'axios'
+console.log('suhhhhhhhhhhhh')
+
 const GitHubSearch = () => {
     console.log(process.env)
     const [query, setQuery] = useState(null)
@@ -19,16 +22,43 @@ const GitHubSearch = () => {
         })
     
     }
-    const handleChange = (e) => {
-        setQuery(e.target.value)
-      };
+    const [username, setUsername] = useState(null)
 
-return(
-    <>
-    <Input onChange={handleChange} placeholder='Search Github' style={{marginTop: '30px', marginLeft: '20%', marginRight:'5px', width: '50%'}} />
-    <Button onClick={gitHubSearch} size='sm' colorScheme='linkedin'>Submit</Button>
-    </>
-)
+    const githubSearch = () => {
+        console.log('username', username)
+        axios.get(`https://api.github.com/users/${username}/repos`, {
+            'headers': {
+                'Authorization': `token ${process.env.REACT_APP_KEY}` 
+                } 
+        })
+            .then(res => {
+                console.log('RESPONSE', res.data)
+            })
+            .catch(err => console.log(err))
+    }
+
+    return (
+      <>
+        
+
+        <Input 
+                placeholder='Search Github' 
+                style={{
+                    marginTop: '30px', 
+                    marginLeft: '20%', 
+                    marginRight:'5px', 
+                    width: '50%'}} 
+                onChange={(e)=> setUsername(e.target.value)}
+            />
+            <Button 
+                size='sm' 
+                colorScheme='linkedin'
+                onClick={githubSearch}
+            >
+                Submit
+            </Button>
+      </>
+    );
 }
 
 export default GitHubSearch;
